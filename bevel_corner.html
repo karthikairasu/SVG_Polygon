@@ -13,6 +13,45 @@
     .tag-wrap {
       filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
     }
+    /**
+ * Beveled corners & negative border-radius with CSS gradients
+ */
+
+.bevel {    
+  background: #c00; /* fallback */
+  background:
+    linear-gradient(135deg, transparent 10px, #c00 0) top left,
+    linear-gradient(225deg, transparent 10px, #c00 0) top right,
+    linear-gradient(315deg, transparent 10px, #c00 0) bottom right,
+    linear-gradient(45deg,  transparent 10px, #c00 0) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+div.round {
+  background-image:
+    radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, #c00 15px),
+    radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, #c00 15px),
+    radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, #c00 15px),
+    radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, #c00 15px);
+}
+
+/* Ignore the CSS from this point, it's just to make the demo more presentable */
+body {
+    background: #444 url('http://lea.verou.me/ft2010/img/darker_wood.jpg') bottom;
+    font-family: sans-serif;
+}
+
+.bevel {
+    width: 500px;
+    margin:15px auto;
+    padding:13px 15px;
+    color: white;
+    line-height:1.5;
+}
+
+p:first-of-type { margin-top: 0 }
+p:last-of-type { margin-bottom: 0}
   </style>
 </head>
 <body class="bg-light">
@@ -42,6 +81,11 @@
       Sorry, your browser does not support inline SVG.
     </svg>
   </div>
+  <br>
+  <div class="bevel"><p>The main idea is to have 4 gradients that each occupy a quarter of the element's area (one for the bottom left, one for the bottom, on of the top right and one for the top left). Then you set the background to 4 linear gradients with the same color stops (in this case we wanted the corner size to be 10px*, so it was transparent <strong>until</strong> 10px and then the color we want <strong>from</strong> 10px) except the corners that are 45deg, 135deg, 225deg and 315deg respectively.</p>
+    <p><small>*Actually not exactly 10px, it's the length of the hypotenuse of an isosceles right-angled triangle, which is around 14px</small></p></div>
+
+  <div class="round bevel">By using radial gradients, you can simulate rounded corners with a negative radius. Just in this case, don't put the color stops at the exact same position, since the result will be too aliased in most browsers (and kinda still is in Webkit).</div>
 </div>
 
 </body>
